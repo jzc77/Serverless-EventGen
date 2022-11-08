@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import Header from './components/Header/Header';
@@ -12,30 +12,63 @@ import Review from './components/UI/Review';
 import Search from './components/UI/Newsletter';
 import Footer from './components/Footer/Footer';
 
+import LoginModal from './components/Header/LoginModal.jsx' // added
+
 function App() {
+  const [modalOpen, setModalOpen] = useState(false); // added
+  const [theme, setTheme] = useState('')
 
-  const [theme, setTheme] = useState ('')
-
-  const toggleTheme = ()=> {
-    theme === '' ? setTheme ('light-theme') : setTheme ('')
+  const toggleTheme = () => {
+    theme === '' ? setTheme('light-theme') : setTheme('')
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     document.body.className = theme
-  },[theme])
+  }, [theme])
 
   return (
     <>
-    <Header theme={theme} toggleTheme={toggleTheme} />
-    {false && <Hero theme={theme} />}
-    {/* <Counter /> */}
-    <Search />
-    <Services />
-    {/* <About /> */}
-    {/* <Team /> */}
-    {/* <Blog /> */}
-    <Review />
-    <Footer />
+      {/* <Header theme={theme} toggleTheme={toggleTheme} /> */}
+      <div className='container'>
+        <div className='nav__wrapper'>
+          <div className="App">
+            <div className='logo' style={{ display: "flex" }}>
+              <h2>EventGen</h2>
+              <button
+                className="openModalBtn"
+                style={{ marginLeft: "auto" }}
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Log In
+              </button>
+              <button
+                className="openModalBtn"
+                style={{ marginLeft: "auto" }}
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
+
+
+      <Hero theme={theme} />
+      {/* {false && <Hero theme={theme} />} */}
+      {/* <Counter /> */}
+      <Search />
+      <Services />
+      {/* <About /> */}
+      {/* <Team /> */}
+      {/* <Blog /> */}
+      <Review />
+      <Footer />
     </>
   );
 }

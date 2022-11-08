@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './header.css';
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 
 // import App from './LoginModal';
+//import LoginModal from './LoginModal.jsx' // added
 
 const nav__links = [
   {
@@ -19,32 +20,7 @@ const nav__links = [
   {
     path: '#signup',
     display: 'Sign Up'
-  },
-
-  // {
-  //     path: '#about',
-  //     display: 'About'
-  // },
-
-  //   {
-  //       path: '#service',
-  //       display: 'Events'
-  //   },
-
-  //   {
-  //       path: '#projects',
-  //       display: 'Projects'
-  //   },
-
-  //   {
-  //     path: '#review',
-  //     display: 'Review'
-  // },
-
-  //   {
-  //       path: '#blog',
-  //       display: 'Blog'
-  //   },
+  }
 ]
 
 const Header = ({ theme, toggleTheme }) => {
@@ -68,6 +44,7 @@ const Header = ({ theme, toggleTheme }) => {
   }, [])
 
   const handleClick = (e) => {
+    console.log("this is clicked");
     e.preventDefault()
 
     const targetAttr = e.target.getAttribute('href')
@@ -81,7 +58,7 @@ const Header = ({ theme, toggleTheme }) => {
   };
 
   const toggleMenu = () => menuRef.current.classList.toggle('menu__active')
-
+  //const [modalOpen, setModalOpen] = useState(false); // added
   return (
     <header className='header' ref={headerRef}>
       <div className='container'>
@@ -100,7 +77,19 @@ const Header = ({ theme, toggleTheme }) => {
                   </a>
                 </li>
               ))}
+              {/* <div className="App">
+                <button
+                  className="openModalBtn"
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
+                >
+                  Open
+                </button>
+                {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
+              </div> */}
             </ul>
+
           </div>
 
           {/* ============== Light mode ============== */}
@@ -109,8 +98,8 @@ const Header = ({ theme, toggleTheme }) => {
             <i class='ri-menu-line'></i>
           </span>
         </div>
-      </div>
-    </header>
+      </div >
+    </header >
   )
 }
 
