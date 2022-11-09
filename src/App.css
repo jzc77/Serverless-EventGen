@@ -71,8 +71,9 @@ body {
 
 a{
   text-decoration: none;
-  color: var(--link-color);
+  /* color: var(--link-color); */
 }
+
 
 h1,
 h2 {
