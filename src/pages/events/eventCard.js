@@ -41,7 +41,8 @@ function EventCard(props) {
   }, [props.data]);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    // <Card sx={{ maxWidth: 345 }}>
+    <Card >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

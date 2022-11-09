@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import EventCard from './eventCard';
 import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -23,21 +24,31 @@ function EventStack(props) {
 
     //generate the table data to columns
      const generateEventStack = () => {
-        return eventList.map((event) => (
-            <Item>
-                <EventCard
-                    title={event[0]}
-                    date={event[1]}
-                    location={event[2]}
-                    details={event[3]}
-                    owner={event[4]}
-                />
-            </Item>
-        ));
+        if (eventList.length > 0) {
+            return eventList.map((event) => (
+                <Item>
+                    <EventCard
+                        title={event[0]}
+                        date={event[1]}
+                        location={event[2]}
+                        details={event[3]}
+                        owner={event[4]}
+                    />
+                </Item>
+            ));
+        }
+        else {
+            return (
+                <Item>
+                    <h3>No Events Found.</h3>
+                </Item>
+            )
+        }
     };
 
   return (
     <Box sx={{ width: '100%' }}>
+      {/* <Stack direction="row"  divider={<Divider orientation="vertical" flexItem />} spacing={2}> //experimenting with row orientation */}
       <Stack spacing={2}>
         {/* <Item>Item 1</Item>
         <Item>Item 2</Item>
