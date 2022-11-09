@@ -58,7 +58,7 @@ const Header = ({ theme, toggleTheme }) => {
   };
 
   const toggleMenu = () => menuRef.current.classList.toggle('menu__active')
-  //const [modalOpen, setModalOpen] = useState(false); // added
+ 
   return (
     <header className='header' ref={headerRef}>
       <div className='container'>
@@ -77,17 +77,6 @@ const Header = ({ theme, toggleTheme }) => {
                   </a>
                 </li>
               ))}
-              {/* <div className="App">
-                <button
-                  className="openModalBtn"
-                  onClick={() => {
-                    setModalOpen(true);
-                  }}
-                >
-                  Open
-                </button>
-                {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
-              </div> */}
             </ul>
 
           </div>
