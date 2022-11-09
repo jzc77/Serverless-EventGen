@@ -13,6 +13,7 @@ import Search from './components/UI/Newsletter';
 import Footer from './components/Footer/Footer';
 
 import LoginModal from './components/Header/LoginModal.jsx' // added
+import { EventPage } from './pages/events/eventPage';
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false); // added
@@ -63,6 +64,7 @@ function App() {
       {/* {false && <Hero theme={theme} />} */}
       {/* <Counter /> */}
       <Search />
+      <EventPage />
       <Services />
       {/* <About /> */}
       {/* <Team /> */}
