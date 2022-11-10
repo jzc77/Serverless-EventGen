@@ -1,0 +1,24 @@
+.wrapper {
+    padding: 5px 5px;
+    margin-bottom: 20px;
+    background-color: lightgrey;
+    align-items: center;
+    border-radius: 10px;
+    transition: transform 0.2s;
+  }
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(5, .175fr);
+    gap: 20px;
+  }
+
+  
+.wrapper:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+  
+.title {
+  text-align: center;
+}

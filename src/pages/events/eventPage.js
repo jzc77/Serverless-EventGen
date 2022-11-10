@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EventStack from "./eventStack";
+import Filter from "./filterBox";
 import {
 	Input,
 	FormControl,
@@ -7,7 +8,9 @@ import {
 	Typography,
 	Button,
 } from "@mui/material";
+import PlaceIcon from '@mui/icons-material/Place';
 import SearchIcon from '@mui/icons-material/Search';
+import "./filterBox.css"
 
 export const EventPage = (props) => {
     // States
@@ -18,6 +21,8 @@ export const EventPage = (props) => {
         ["Clown Convention", "December 8th, 2022", "BCIT Burnaby Campus", "haha", "Nabil", "Convention"]
         ]
 	});
+
+    const filters = ["Today", "This weekend", "Free", "Music", "Food & Drink"];
 
     const [workingData, setWorkingData] = useState([]);
     // sample eventdata array: ["eventTitle", "date", "location", "details", "owner"] 
@@ -32,6 +37,8 @@ export const EventPage = (props) => {
     const [type, setType] = useState({
 		eventType: "",
 	});
+
+    const [activeFilter, setActiveFilter] = useState("");
 
     // Handler for search (This is called whenever the search field changes)
     const handleSearchChange = (prop) => (event) => {
@@ -79,6 +86,14 @@ export const EventPage = (props) => {
                     onChange={handleSearchChange("query")}
                     startAdornment={<InputAdornment position="start"><SearchIcon style={{color: "whitesmoke"}}/></InputAdornment>}
                 />
+                <Input
+                sx = {{m: 1}}
+                style= {{color:"whitesmoke"}}
+                variant = "standard"
+                value= {location.query}
+                placeholder="Vancouver"
+                startAdornment={<InputAdornment position="start"> <PlaceIcon style={{color: "whitesmoke"}}/></InputAdornment>}>
+                </Input>
             </FormControl>
             <Button
                 // style={{ backgroundColor: "#03045e", width: "60%" }}
@@ -87,6 +102,20 @@ export const EventPage = (props) => {
             >
                 <Typography style={{ color: "#FFFFFF", textTransform: "none" }}>Search</Typography>
             </Button>
+            <div className="filters">
+
+            {filters.map((filter, index) => {
+                return (
+                    <Filter
+                     className="filters"
+                     key = {index}
+                     title = {filter}
+                     isActive = {filter === activeFilter}
+                     onclick={() => {}}/>
+                )
+            })}
+              </div>
+
             </div>
             <br></br>
             <EventStack data={workingData}/>
