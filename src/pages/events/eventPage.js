@@ -66,15 +66,18 @@ export const EventPage = (props) => {
 
     return (
         <div className='container'>
-            <h1>Events</h1>
+            <h1>Your Events</h1>
             <div className='container'>
             <FormControl>
-                <Input sx={{ m: 1 }} variant="standard"
+                <Input 
+                    sx={{ m: 1 }}
+                    style = {{color: "whitesmoke"}} 
+                    variant="standard"
                     id="standard-adornment-amount"
                     value={searchQuery.query}
-                    placeholder='Search for "hiking"'
+                    placeholder='Search events your events'
                     onChange={handleSearchChange("query")}
-                    startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                    startAdornment={<InputAdornment position="start"><SearchIcon style={{color: "whitesmoke"}}/></InputAdornment>}
                 />
             </FormControl>
             <Button
