@@ -13,9 +13,11 @@ import Search from './components/UI/Newsletter';
 import Footer from './components/Footer/Footer';
 
 import LoginModal from './components/Header/LoginModal.jsx' // added
+import SignupModal from './components/Header/SignupModal';
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(false); // added
+  const [LoginModalOpen, setLoginModalOpen] = useState(false); // added
+  const [SignupModalOpen, setSignupModalOpen] = useState(false); // added
   const [theme, setTheme] = useState('')
 
   const toggleTheme = () => {
@@ -38,7 +40,7 @@ function App() {
                 className="openModalBtn"
                 style={{ marginLeft: "auto" }}
                 onClick={() => {
-                  setModalOpen(true);
+                  setLoginModalOpen(true);
                 }}
               >
                 Log In
@@ -47,7 +49,7 @@ function App() {
                 className="openModalBtn"
                 style={{ marginLeft: "auto" }}
                 onClick={() => {
-                  setModalOpen(true);
+                  setSignupModalOpen(true);
                 }}
               >
                 Sign Up
@@ -56,8 +58,8 @@ function App() {
           </div>
         </div>
       </div>
-      {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
-
+      {LoginModalOpen && <LoginModal setOpenModal={setLoginModalOpen} />}
+      {SignupModalOpen && <SignupModal setOpenModal={setSignupModalOpen} />}
 
       <Hero theme={theme} />
       {/* {false && <Hero theme={theme} />} */}
