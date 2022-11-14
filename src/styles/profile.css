@@ -1,0 +1,44 @@
+.addFriend .modal-dialog {
+    height: 800px;
+}
+.addFriend .modal-content {
+    height: 700px;
+    overflow: auto;
+    background: rgba(35, 93, 173, 1);
+}
+.addFriend .modal-content {
+    width: 600px;
+}
+
+.addFriend .secondary_btn {
+    height: 50px;
+}
+
+.addFriend .modal-header {
+    height: 50px;
+    position: sticky;
+}
+.modal-footer {
+    justify-content: center;
+}
+
+.addFriend {
+    overflow: auto;
+}
+
+.friendBox {
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 0.5px solid;
+    border-color: lightgray;
+    border-radius: 5px;
+}
+
+.modal-title {
+    color: white;
+    
+}
+.modal-title:hover {
+    cursor: pointer;
+}
