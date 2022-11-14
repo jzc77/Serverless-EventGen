@@ -50,6 +50,11 @@ The page will reload if you make edits.
 Open the project folder and Navigate to `/src/components/`. <br/>
 You will find all the components used and you can edit your information accordingly.
 
+## Usage of src/db/db.json
+
+npm install json-server
+npx json-server --watch -p 5000 src/db/db.json. You can change the port to a different port as well.
+
 ### Show your support
 
 Give a ⭐ if you like this website!

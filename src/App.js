@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import { BrowserRouter, Router, Routes, Route, Switch } from "react-router-dom";
+import Home from './components/UI/Home'
+import Profile from "./components/UI/Profile";
 import './App.css';
 import Header from './components/Header/Header';
 import Hero from './components/UI/Hero';
@@ -30,47 +32,52 @@ function App() {
 
   return (
     <>
-      {/* <Header theme={theme} toggleTheme={toggleTheme} /> */}
-      <div className='container'>
-        <div className='nav__wrapper'>
-          <div className="App">
-            <div className='logo' style={{ display: "flex" }}>
-              <h2>EventGen</h2>
-              <button
-                className="openModalBtn"
-                style={{ marginLeft: "auto" }}
-                onClick={() => {
-                  setLoginModalOpen(true);
-                }}
-              >
-                Log In
-              </button>
-              <button
-                className="openModalBtn"
-                style={{ marginLeft: "auto" }}
-                onClick={() => {
-                  setSignupModalOpen(true);
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
+      {/* <div className='nav__wrapper mt-5 justify-content-start ms-5'>
+        <div className='logo d-flex align-items-center justify-content-around' style={{ width: '100%' }}>
+          <h2>EventGen</h2>
+          <div className='d-flex ms-2'>
+            <a
+              className='menu__link ms-4'
+
+              onClick={() => {
+                setLoginModalOpen(true);
+              }}
+            >
+              Log In
+            </a>
+            <a
+              className='menu__link ms-4'
+              onClick={() => {
+                setSignupModalOpen(true);
+              }}
+            >
+              Sign Up
+            </a>
           </div>
+
         </div>
-      </div>
+
+      </div> */}
+
       {LoginModalOpen && <LoginModal setOpenModal={setLoginModalOpen} />}
       {SignupModalOpen && <SignupModal setOpenModal={setSignupModalOpen} />}
+      {false && <Hero theme={theme} />}
+    
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              exact path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/profile"
+              element={<Profile />}
+            />
+          </Routes>
 
-      <Hero theme={theme} />
-      {/* {false && <Hero theme={theme} />} */}
-      {/* <Counter /> */}
-      <Search />
-      <Services />
-      {/* <About /> */}
-      {/* <Team /> */}
-      {/* <Blog /> */}
-      <Review />
-      <Footer />
+        </BrowserRouter>
+      </div>
     </>
   );
 }

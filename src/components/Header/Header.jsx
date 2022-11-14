@@ -3,8 +3,8 @@ import './header.css';
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 
-// import App from './LoginModal';
-//import LoginModal from './LoginModal.jsx' // added
+import App from './LoginModal';
+import LoginModal from './LoginModal.jsx' // added
 
 const nav__links = [
   {

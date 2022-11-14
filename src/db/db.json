@@ -1,0 +1,25 @@
+{
+    "events": [
+        { "id": 1, "user_id": 6, "eventName": "Pablo Picasso Exhibtition", "user_name": "Daniel Zhang", "eventType": "Arts", "event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "10", "event_time": "2022/11/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 5, "user_id": 6, "eventName": "Vanvouver Open", "user_name": "Daniel Zhang", "eventType": "Sports", "event_description": "The last game of Roger Federer", "participants": "1000", "event_time": "2022/11/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 2, "user_id": 7, "eventName": "Sevens", "eventType": "Sports", "user_name": "Max","event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "1000", "event_time": "2022/11/07 18:20pm", "location": "Vancouver", "isCanceled": false },
+
+        { "id": 3, "user_id": 8, "eventName": "Canucks", "eventType": "Sports", "user_name": "Michael Yu", "event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it","participants": "1000", "event_time": "2022/11/05 18:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 4, "user_id": 9, "eventName": "Avengers - End Game", "eventType": "Movies", "user_name": "Jazica Chan","event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 6, "user_id": 10, "eventName": "Dua Lipa", "eventType": "Concerts", "user_name": "Silvana","event_description": "Duo Lipa Love is love World Tour Concert", "participants": "9000", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 7, "user_id": 12, "eventName": "Everything, Everywhere, All at once", "eventType": "Movies", "user_name": "Henry","event_description": "A sci-con movie directed by Daniel Zhang. Bring your tissues!", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 8, "user_id": 13, "eventName": "Avengers - End Game", "eventType": "Movies", "user_name": "Kyle","event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 9, "user_id": 14, "eventName": "Crouching Tiger Hidden Dragon", "eventType": "Movies", "user_name": "Rando","event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 10, "user_id": 16, "eventName": "Tennis", "eventType": "Sports", "user_name": "Henry Cavil","event_description": "Come join us and hit some tennis on this Saturday morning. Please click to see details", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false },
+        { "id": 11, "user_id": 17, "eventName": "Avengers - End Game", "eventType": "Movies", "user_name": "Jason","event_description": "The Pablo Picasso show is a once in a life time art show. You better not miss it", "participants": "10", "event_time": "2022/12/05 14:20pm", "location": "Vancouver", "isCanceled": false }
+    ],
+
+    "users": [
+        { "user_id": 6, "user_name":"Jazica Chan"},
+        { "user_id": 7, "user_name":"Michael Yu"},
+        { "user_id": 8, "user_name":"Max"},
+        { "user_id": 9, "user_name":"Henry"},
+        { "user_id": 10, "user_name":"Silvana"}
+    ]
+        
+}
