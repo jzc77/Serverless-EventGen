@@ -71,3 +71,13 @@
 #cancelBtn {
   background-color: crimson;
 }
+
+.modalContainer a {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.modalContainer a:hover {
+  cursor: pointer;
+  color: blue;
+}

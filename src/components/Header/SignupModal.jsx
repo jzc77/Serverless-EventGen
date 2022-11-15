@@ -1,20 +1,40 @@
 import { React, useState } from "react";
 import "./SignupModal.css";
 import { Form, Button } from "react-bootstrap";
-
-
+import UserPool from "../../utils/UserPool";
+import { useNavigate } from 'react-router-dom'
+import LoginModal from "./LoginModal";
 
 function SignupModal({ setOpenModal }) {
 
-  const [username, setUserName] = useState(null);
-  const [firstname, setFirstName] = useState(null);
-  const [lastname, setLastName] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
+  const switchToLogin = () => {
+    setLogin(true)
+    
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    UserPool.signUp(email, password, [], null, (err, data) => {
+      if (err) {
+        setError(err.message)
+        console.log(err)
+      } else {
+        console.log(data)
+        navigate('/profile')
+      }
+      
+    })
+  }
   return (
     <div className="modalBackground">
-      <div className="modalContainer" style={{ height: '92%', marginTop: "-5%" }}>
+      <div className="modalContainer" style={{ height: '65%' }}>
         <div className="titleCloseBtn">
           <button
             onClick={() => {
@@ -24,41 +44,33 @@ function SignupModal({ setOpenModal }) {
             X
           </button>
         </div>
-        <h1 clasName="mb-5" style={{ textAlign: 'center', color: 'black', marginBottom: '10px' }}>Sign up</h1>
+        <h1 className="mb-1" style={{ textAlign: 'center', color: 'black', marginBottom: '10px' }}>Sign up</h1>
         <div>
-          <p style={{ textAlign: 'center' }}>Already have an account? <a style={{ color: 'black', textDecoration: 'underline' }}>Log in</a></p>
+          <p style={{ textAlign: 'center' }}>Already have an account? <a onClick={switchToLogin} style={{ textDecoration: 'underline'}}>Log in</a></p>
         </div>
-        <Form style={{ margin: 'auto', marginTop: '20px', textAlign: 'center', width: '100%' }}>
-          <div class="mb-3">
+        <form onSubmit={onSubmit} style={{ margin: 'auto', marginTop: '20px', textAlign: 'center', width: '100%' }}>
+          <div className="mb-3">
           <p className="form-label" style={{ textAlign: 'left' }}>User name</p>
-            <input type="username" class="form-control" required onChange={(e) => setUserName(e.target.value)} placeholder="username" />
+            <input type="username" value={username} className="form-control" required onChange={(e) => setUserName(e.target.value)} placeholder="username" />
           </div>
 
-          <div class="mb-3">
-          <p className="form-label" style={{ textAlign: 'left' }}>First name</p>
-            <input type="firstname" class="form-control" required onChange={(e) => setFirstName(e.target.value)} placeholder="John" />
-          </div>
-
-          <div class="mb-3">
-          <p className="form-label" style={{ textAlign: 'left' }}>Last name</p>
-            <input type="lastname" class="form-control" required onChange={(e) => setLastName(e.target.value)} placeholder="Smith" />
-          </div>
-
-          <div class="mb-3">
+          <div className="mb-3">
             <p className="form-label" style={{ textAlign: 'left' }}>Email</p>
-            <input type="email" class="form-control" required onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
+            <input type="email" value={email} className="form-control" required onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
           </div>
 
-          <div class="mb-3">
+          <div className="mb-3">
           <p className="form-label" style={{ textAlign: 'left' }}>Password</p>
-            <input type="password" class="form-control" required onChange={(e) => setPassword(e.target.value)} placeholder="password" />
+            <input type="password" value={password} className="form-control" required onChange={(e) => setPassword(e.target.value)} placeholder="password" />
           </div>
           <Button variant="primary" type="submit" style={{ height: '40px', width: '80%', borderRadius: '6px', background: '#0c123d', color: 'white', fontWeight: 'bold' }}>
             Submit
           </Button>
-        </Form>
-
+          {error && <p style={{color: 'red'}}>{error}</p>}
+        </form>
+        
       </div>
+      {login && <LoginModal setOpenModal={setOpenModal}/>}
     </div>
   );
 }
