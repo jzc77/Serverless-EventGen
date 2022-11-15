@@ -1,6 +1,5 @@
 import React from 'react'
 import FriendEvent from './FriendEvent'
-import Newletter from './Newsletter'
 import UserEvent from './UserEvent'
 import Pagination from './Pagination'
 import Modal from 'react-bootstrap/Modal'
@@ -8,26 +7,24 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import '../../styles/hero.css'
 import '../../styles/profile.css'
+import { useNavigate } from 'react-router-dom'
 
 import heroDarkImg from '../../images/pic-main-calendar.png'
 import lightImg from '../../images/light-hero-bg.png'
-import Services from './Services'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import useFetch from '../composables/useFetchEvents'
 import useFetchUsers from '../composables/useFetchUsers'
 import useFetchEvents from '../composables/useFetchEvents'
+import { useContext } from 'react'
+import { AccountContext } from '../auth/Account'
 
 const Profile = ({ theme }) => {
-  // const [users, setUsers] = useState([])
-  // const [friends, setFriends] = useState([])
-  // const [events, setEvents] = useState([])
-  // const [userEvents, setUserEvents] = useState([])
+
   const [currentPage, setCurrentPage] = useState(1)
   const [eventsPerPage, setEventsPerPageUser] = useState(3)
   const [currentPageUser, setCurrentPageUser] = useState(1)
   const [eventsPerPageUser, setEventsPerPage] = useState(3)
-  // const [userName, setUserName] = useState('')
   const [isCancel, setIsCancel] = useState(false)
   const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
   const [isCancelAddFriend, setIsCancelAddFriend] = useState(false)
@@ -36,6 +33,43 @@ const Profile = ({ theme }) => {
   const { events, userEvents, userName, setUserEvents } = useFetchEvents('http://localhost:5000/events')
 
   const { users, friends, setUsers, setFriends } = useFetchUsers('http://localhost:5000/users')
+
+  const { getSession, logout } = useContext(AccountContext)
+  const [status, setStatus] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect( () => {
+
+    const fetchData = async () => {
+      try {
+        const res = await getSession()
+        console.log("Session: ", res)
+        setStatus(true)
+      } catch (err) {
+        
+        navigate('/')
+      }
+    }
+    
+    fetchData()
+    // getSession()
+    //     .then((session) => {
+    //         console.log("Session: ", session)
+    //         setStatus(true)
+    //         if (!status) {
+    //         }
+    //     })
+    // console.log("Status: ", status)
+    
+}, [])
+
+  
+ 
+  const logoutUser = () => {
+    logout()
+    navigate('/')
+
+  }
   // useEffect(() => {
   //   // fetch('http://localhost:5000/events')
   //   //   .then(res => {
@@ -116,17 +150,12 @@ const Profile = ({ theme }) => {
     console.log("Users to add:", users)
     let chars = []
     let possibleFriends = []
-    // let char = document.getElementById('friend')
     let char = event.target.value
     chars.push(char.toLowerCase())
     let string = chars.join()
-    console.log("Serch String:", string)
-    console.log(string)
-    console.log("user length:", users.length)
+
     for (let i = 0; i < users.length; i++) {
-      console.log(i)
-      console.log("User length", users[i].user_name.length)
-      console.log("True or False:", patternSearching(users[i].user_name, string))
+
       if (patternSearching(users[i].user_name.toLowerCase(), string)) {
         console.log(patternSearching(users[i].user_name, string))
         possibleFriends.push(users[i])
@@ -136,7 +165,7 @@ const Profile = ({ theme }) => {
   }
 
   const patternSearching = (string, pattern) => {
-    
+
     for (let i = 0; i <= string.length - pattern.length; i++) {
       let j = 0
       while (j < pattern.length) {
@@ -148,9 +177,8 @@ const Profile = ({ theme }) => {
       if (j === pattern.length) {
         return true
       }
-    } 
-    
-    
+    }
+
   }
 
   return (
@@ -161,7 +189,7 @@ const Profile = ({ theme }) => {
 
         <div className='d-flex align-items-center'>
           <h1 className='me-4'>Hello, {userName}</h1>
-          <a style={{ color: 'white', cursor: 'pointer' }}>Log out</a>
+          <a onClick={logoutUser} style={{ color: 'white', cursor: 'pointer' }}>Log out</a>
         </div>
 
         <div className='newsletter__form'>
@@ -173,8 +201,8 @@ const Profile = ({ theme }) => {
         <div className='hero__wrapper'>
           <div className='hero__content'>
             <div>
-              <h3 style={{color: 'white '}}>Wanna see what your friends are up to? Click the Add Friends button below.</h3><br/><br/>
-              <h3 style={{color: 'white '}}>Wanna create your own event? Click the Create Event button below.</h3>
+              <h3 style={{ color: 'white ' }}>Wanna see what your friends are up to? Click the Add Friends button below.</h3><br /><br />
+              <h3 style={{ color: 'white ' }}>Wanna create your own event? Click the Create Event button below.</h3>
               <h2 className='highlight'>Find. Meet. Grow!</h2>
             </div>
             <div className='hero__btns'>
@@ -239,7 +267,7 @@ const Profile = ({ theme }) => {
                 {friends && friends.map((user) => (
                   <div className='d-flex justify-content-between align-items-center friendBox'>
                     <h4 className='pb-5 pt-5' style={{ color: 'black' }}>{user.user_name}</h4>
-                    <Button variant="primary" type="submit" style={{height: '50px'}}>
+                    <Button variant="primary" type="submit" style={{ height: '50px' }}>
                       Add friend
                     </Button>
                   </div>
@@ -252,7 +280,7 @@ const Profile = ({ theme }) => {
               <Button variant="secondary" onClick={handleCloseModalAddFriend}>
                 Cancel
               </Button>
-            
+
             </Modal.Footer>
           </Modal>
 
@@ -266,31 +294,31 @@ const Profile = ({ theme }) => {
 
             <Modal.Body>
               <Form>
-              <div className="d-flex justify-content-between">
-                <input className="form-control-lg" type='text' placeholder='Type a name' style={{ width: '100%' }} onKeyDown={e => searchFriends(e)}/>
-                <Button variant="primary" type="submit">
-                  Search
-                </Button>
-              </div>
-              <div className='d-flex flex-column mt-3 '>
-                {users && users.map((user) => (
-                  <div className='d-flex justify-content-between align-items-center friendBox'>
-                    <h4 className='pb-5 pt-5' style={{ color: 'black' }}>{user.user_name}</h4>
-                    <Button variant="primary" type="submit" style={{height: '50px'}}>
-                      Add friend
-                    </Button>
-                  </div>
+                <div className="d-flex justify-content-between">
+                  <input className="form-control-lg" type='text' placeholder='Type a name' style={{ width: '100%' }} onKeyDown={e => searchFriends(e)} />
+                  <Button variant="primary" type="submit">
+                    Search
+                  </Button>
+                </div>
+                <div className='d-flex flex-column mt-3 '>
+                  {users && users.map((user) => (
+                    <div className='d-flex justify-content-between align-items-center friendBox'>
+                      <h4 className='pb-5 pt-5' style={{ color: 'black' }}>{user.user_name}</h4>
+                      <Button variant="primary" type="submit" style={{ height: '50px' }}>
+                        Add friend
+                      </Button>
+                    </div>
 
-                ))}
+                  ))}
 
-              </div>
+                </div>
               </Form>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModalCreateEvent}>
                 Cancel
               </Button>
-            
+
             </Modal.Footer>
           </Modal>
 

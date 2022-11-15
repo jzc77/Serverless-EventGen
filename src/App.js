@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Router, Routes, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/UI/Home'
 import Profile from "./components/UI/Profile";
+import Status from './components/auth/Status';
 import './App.css';
 
 import Hero from './components/UI/Hero';
@@ -33,7 +34,9 @@ function App() {
 
       <div className="App">
         <Account>
+        
         <BrowserRouter>
+        {/* <Status />? */}
           <Routes>
             <Route
               exact path="/"

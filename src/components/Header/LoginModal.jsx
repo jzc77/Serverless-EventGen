@@ -12,7 +12,7 @@ function LoginModal({ setOpenModal }) {
   const [email, setEmail] = useState('');
   const [signup, setSignup] = useState(false)
   const [error, setError] = useState('')
-  const { authenticate, err } = useContext(AccountContext)
+  const { authenticate} = useContext(AccountContext)
   const navigate = useNavigate()
   const switchToSignup = () => {
     setSignup(true)

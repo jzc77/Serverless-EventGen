@@ -39,7 +39,7 @@ const About = () => {
                 chooseData.map((item, index) => (
                   <div className='choose__us-item' key={index}>
                     <span className='choose__us-icon'>
-                      <i class={item.icon}></i>
+                      <i className={item.icon}></i>
                     </span>
                     <div>
                       <h4 className='choose__us-title'>{item.title}</h4>

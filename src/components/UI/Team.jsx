@@ -54,9 +54,9 @@ const Team = () => {
                                     <p className='description'>{item.position}</p>
 
                                     <div className='team__member-social'>
-                                        <span><i class='ri-linkedin-line'></i></span>
-                                        <span><i class='ri-twitter-line'></i></span>
-                                        <span><i class='ri-facebook-line'></i></span>
+                                        <span><i className='ri-linkedin-line'></i></span>
+                                        <span><i className='ri-twitter-line'></i></span>
+                                        <span><i className='ri-facebook-line'></i></span>
                                     </div>
                                 </div>
                             </div>

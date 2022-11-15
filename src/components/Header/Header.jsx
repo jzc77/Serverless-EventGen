@@ -84,7 +84,7 @@ const Header = ({ theme, toggleTheme }) => {
           {/* ============== Light mode ============== */}
 
           <span className='mobile__menu' onClick={toggleMenu}>
-            <i class='ri-menu-line'></i>
+            <i className='ri-menu-line'></i>
           </span>
         </div>
       </div >

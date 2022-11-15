@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import LoginModal from '../Header/LoginModal' // added
 import SignupModal from '../Header/SignupModal';
+import './header.css';
 
 function NewHeader() {
   const [LoginModalOpen, setLoginModalOpen] = useState(false) // added

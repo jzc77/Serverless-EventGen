@@ -1,8 +1,7 @@
 import { React, useState } from "react";
 import "./SignupModal.css";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import UserPool from "../../utils/UserPool";
-import { useNavigate } from 'react-router-dom'
 import LoginModal from "./LoginModal";
 
 function SignupModal({ setOpenModal }) {
@@ -12,8 +11,7 @@ function SignupModal({ setOpenModal }) {
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState(false)
   const [error, setError] = useState('')
-  const navigate = useNavigate()
-
+  
   const switchToLogin = () => {
     setLogin(true)
     
@@ -21,13 +19,15 @@ function SignupModal({ setOpenModal }) {
 
   const onSubmit = (event) => {
     event.preventDefault()
+
+        setLogin(true)
     UserPool.signUp(email, password, [], null, (err, data) => {
       if (err) {
         setError(err.message)
         console.log(err)
       } else {
         console.log(data)
-        navigate('/profile')
+        
       }
       
     })
