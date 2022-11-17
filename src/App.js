@@ -9,6 +9,7 @@ import Hero from './components/UI/Hero';
 import LoginModal from './components/Header/LoginModal.jsx' // added
 import SignupModal from './components/Header/SignupModal';
 import { Account } from "./components/auth/Account"
+import ChangePassword from './components/auth/ChangePassword';
 
 function App() {
   const [LoginModalOpen, setLoginModalOpen] = useState(false); // added
@@ -28,7 +29,7 @@ function App() {
       
         {LoginModalOpen && <LoginModal setOpenModal={setLoginModalOpen} />}
         {SignupModalOpen && <SignupModal setOpenModal={setSignupModalOpen} />}
-     
+        
 
       {false && <Hero theme={theme} />}
 

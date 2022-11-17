@@ -69,11 +69,14 @@ body {
   font-family: var(--font-name);
 }
 
-a{
+a {
   text-decoration: none;
-  /* color: var(--link-color); */
+  color: var(--link-color);
 }
 
+a:hover {
+  color: gray;
+}
 
 h1,
 h2 {

@@ -68,3 +68,7 @@
 #cancelBtn {
   background-color: crimson;
 }
+
+a:hover {
+  color: gray;
+}
