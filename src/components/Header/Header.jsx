@@ -3,8 +3,8 @@ import './header.css';
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
 
-// import App from './LoginModal';
-//import LoginModal from './LoginModal.jsx' // added
+import App from './LoginModal';
+import LoginModal from './LoginModal.jsx' // added
 
 const nav__links = [
   {
@@ -58,7 +58,7 @@ const Header = ({ theme, toggleTheme }) => {
   };
 
   const toggleMenu = () => menuRef.current.classList.toggle('menu__active')
-  //const [modalOpen, setModalOpen] = useState(false); // added
+ 
   return (
     <header className='header' ref={headerRef}>
       <div className='container'>
@@ -77,17 +77,6 @@ const Header = ({ theme, toggleTheme }) => {
                   </a>
                 </li>
               ))}
-              {/* <div className="App">
-                <button
-                  className="openModalBtn"
-                  onClick={() => {
-                    setModalOpen(true);
-                  }}
-                >
-                  Open
-                </button>
-                {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
-              </div> */}
             </ul>
 
           </div>
@@ -95,7 +84,7 @@ const Header = ({ theme, toggleTheme }) => {
           {/* ============== Light mode ============== */}
 
           <span className='mobile__menu' onClick={toggleMenu}>
-            <i class='ri-menu-line'></i>
+            <i className='ri-menu-line'></i>
           </span>
         </div>
       </div >

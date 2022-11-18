@@ -34,7 +34,7 @@ const Counter = () => {
             {counterData.map((item,index)=>(
               <div className='counter__item' key={index}>
                 <span className='service__icon'>
-                  <i class={item.icon}></i>
+                  <i className={item.icon}></i>
                 </span>
                <h3 className='counter__number'>{item.number}+</h3>
                <h4 className='counter__title'>{item.text}</h4>

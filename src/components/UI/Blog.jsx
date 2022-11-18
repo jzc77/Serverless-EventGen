@@ -52,7 +52,7 @@ const Blog = () => {
                                     {item.desc}
                                 </p>
                                 <div>
-                                    <a href={item.linkUrl} className='learn__more'><i class='ri-arrow-right-line'></i></a>
+                                    <a href={item.linkUrl} className='learn__more'><i className='ri-arrow-right-line'></i></a>
                                 </div>
                             </div>
                         ))

@@ -6,7 +6,7 @@
 .service__item-wrapper{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    
     column-gap: 2rem;
 }
 .services__item {
@@ -48,6 +48,10 @@
     color: var(--primary-color);
     font-size: 1.3rem;
     margin-bottom: 30px;
+}
+
+.secondary__btn {
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 992px) {

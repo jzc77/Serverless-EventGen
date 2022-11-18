@@ -16,7 +16,10 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .modalContainer .title {
@@ -69,6 +72,12 @@
   background-color: crimson;
 }
 
-a:hover {
-  color: gray;
+.modalContainer a {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.modalContainer a:hover {
+  cursor: pointer;
+  color: blue;
 }

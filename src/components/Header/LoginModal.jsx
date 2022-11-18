@@ -1,18 +1,57 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "./LoginModal.css";
 import { Form, Button } from "react-bootstrap";
-
-
+import SignupModal from "./SignupModal";
+import { AccountContext } from "../auth/Account"
+import { useContext } from "react";
+import { useNavigate } from 'react-router-dom'
+import ChangePassword from "../auth/ChangePassword";
 
 function LoginModal({ setOpenModal }) {
 
-  const [username, setUserName] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [signup, setSignup] = useState(false)
+  const [error, setError] = useState('')
+  const [isPasswordReset, setIsPasswordReset] = useState(false)
+  const [login, setLogin] = useState(true)
+  const { authenticate } = useContext(AccountContext)
 
+  const { getSession } = useContext(AccountContext)
+
+  useEffect(() => {
+    getSession()
+      .then(() => {
+
+      })
+  }, [])
+
+  const navigate = useNavigate()
+  const switchToSignup = () => {
+    setSignup(true)
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    authenticate(email, password)
+      .then(data => {
+        console.log("Logged in!", data)
+        navigate('/profile')
+      })
+      .catch(err => {
+        setError(err.message)
+        console.error("Failed to login", err)
+      })
+
+  }
+
+  const showPasswordReset = () => {
+    setIsPasswordReset(true)
+    setLogin(false)
+  }
   return (
     <div className="modalBackground">
-      <div className="modalContainer">
+      {login && <div className="modalContainer" style={{ height: '65%' }}>
         <div className="titleCloseBtn">
           <button
             onClick={() => {
@@ -22,49 +61,35 @@ function LoginModal({ setOpenModal }) {
             X
           </button>
         </div>
-        {/* <div className="title">
-          <h1>Are You Sure You Want to Continue?</h1>
-        </div> */}
-        <div className="body">
-          <p>Sign Up</p>
+        <h1 className="mb-1" style={{ textAlign: 'center', color: 'black', marginBottom: '10px' }}>Log in</h1>
+        <div>
+          <p style={{ textAlign: 'center' }}>Not a member yet? <a onClick={switchToSignup} style={{ color: 'black', textDecoration: 'underline' }}>Sign up </a></p>
+
         </div>
-        <Form style={{ margin: 'auto', marginTop: '50px', textAlign: 'center' }}>
-          <div className="">
-            <label className="col-sm-2 col-form-label">User name:</label>
-            <div className="col-sm-10">
-              <input type="email" className="form-control" style={{ height: '40px', width: '80%', marginBottom: '15px', borderRadius: '6px' }} required onChange={(e) => setUserName(e.target.value)} />
-            </div>
+        <form onSubmit={onSubmit} style={{ margin: 'auto', marginTop: '50px', textAlign: 'center', width: '100%' }}>
+
+          <div className="mb-3">
+            <p className="form-label" style={{ textAlign: 'left' }}>Email</p>
+            <input type="email" className="form-control" required onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
           </div>
 
-          <div className="mb-3 row">
-            <label className="col-sm-2 col-form-label">Email Address:</label>
-            <div className="col-sm-10">
-              <input type="email" className="form-control" style={{ height: '40px', width: '80%', marginBottom: '15px', borderRadius: '6px' }} required onChange={(e) => setEmail(e.target.value)} />
+          <div className="mb-3">
+            <div className="d-flex justify-content-between">
+              <p className="form-label">Password</p>
+              <a onClick={showPasswordReset} style={{ color: 'blue' }}>Forgot password</a>
             </div>
-          </div>
 
-          <div className="mb-3 row">
-            <label className="col-sm-2 col-form-label">Password:</label>
-            <div className="col-sm-10">
-              <input type="password" className="form-control" style={{ height: '40px', width: '80%', marginBottom: '15px', borderRadius: '6px' }} required onChange={(e) => setPassword(e.target.value)} />
-            </div>
+            <input type="password" className="form-control" required onChange={(e) => setPassword(e.target.value)} placeholder="password" />
           </div>
-          <Button variant="primary" type="submit" style={{ height: '40px', width: '100px', borderRadius: '6px', background: '#0c123d', color: 'white', fontWeight: 'bold' }}>
+          <Button variant="primary" type="submit" style={{ height: '40px', width: '80%', borderRadius: '6px', background: '#0c123d', color: 'white', fontWeight: 'bold' }}>
             Submit
           </Button>
-        </Form>
-        <div className="footer">
-          <button
-            onClick={() => {
-              setOpenModal(false);
-            }}
-            id="cancelBtn"
-          >
-            Cancel
-          </button>
-          <button>Continue</button>
-        </div>
-      </div>
+          {error.length > 0 && <p style={{ color: 'red' }}>{error}</p>}
+        </form>
+
+      </div>}
+      {signup && <SignupModal setOpenModal={setOpenModal} />}
+      {isPasswordReset && <ChangePassword />}
     </div>
   );
 }
