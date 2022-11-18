@@ -5,7 +5,7 @@ const Filter = ({title, isActive, onClick}) => {
         <div
          className = "wrapper"
          onClick ={onClick}
-         style={{backgroundColor: `${isActive ? "lavender" : "whiteSmoke"}`}}>
+         style={{backgroundColor: `${isActive ? "lightblue" : "whiteSmoke"}`}}>
                 <p className="title"> {title} </p>
         </div>
     )
