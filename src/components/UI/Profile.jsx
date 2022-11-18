@@ -26,9 +26,18 @@ const Profile = ({ theme }) => {
   const [currentPageUser, setCurrentPageUser] = useState(1)
   const [eventsPerPageUser, setEventsPerPage] = useState(3)
   const [isCancel, setIsCancel] = useState(false)
-  const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
   const [isCancelAddFriend, setIsCancelAddFriend] = useState(false)
+  const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
   const [event_id, setEventId] = useState("12343")
+
+  const [eventName, setEventName] = useState('')
+  const [description, setDescription] = useState('')
+  const [eventType, setEventType] = useState('')
+  const [time, setTime] = useState('')
+
+  const onSubmit = () => {
+
+  }
 
   const { events, userEvents, userName, setUserEvents } = useFetchEvents('http://localhost:5000/events')
 
@@ -141,9 +150,17 @@ const Profile = ({ theme }) => {
     setIsCancelAddFriend(false)
   }
 
-  const handleCloseModalCreateEvent = () => {
-    setIsCancelAddFriend(false)
+
+  const handleCreateEvent = () => {
+    setIsCancelCreateEvent(true)
   }
+
+  const handleCloseModalCreateEvent = () => {
+    setIsCancelCreateEvent(false)
+  }
+
+
+
 
   const searchFriends = (event, users) => {
     console.log(event.target.value)
@@ -206,19 +223,21 @@ const Profile = ({ theme }) => {
               alt='eventgen-profile' />
             <div className='hero__btns'>
               <button className='secondary__btn' onClick={handleAddFriend}>Add Friends</button>
-              <button className='secondary__btn' onClick={handleAddFriend}>Create Event</button>
+              <button className='secondary__btn' onClick={handleCreateEvent}>Create Event</button>
             </div>
 
           </div>
 
           <div className='profile__aboutme'>
             <div>
-              <h3 style={{ color: 'white ' }}>About Me</h3>
+              {/* <h3 style={{ color: 'white ' }}>About Me</h3> */}
               <h4 style={{ color: 'white ' }}>
                 <br />
-                Hi, thanks for stopping by! I am driven, goal-oriented, and goes after what I want in life. I'm caring and dependable.
+                What your friends are up to? Click the Add Friends button to find out!
                 <br /><br />
-                If you want to go to events together, we should chat. Send me a message and <span className='highlight'>let’s start the conversation!</span>
+                Wanna create your own event? Click the Create Event button.
+                <br /><br />
+                <span className='highlight'>Let’s start the conversation!</span>
               </h4>
             </div>
 
@@ -258,6 +277,7 @@ const Profile = ({ theme }) => {
             </Modal.Footer>
           </Modal>
 
+          {/* Add Friend Modal */}
           <Modal className="addFriend" show={isCancelAddFriend} users={users}>
             <Modal.Header>
               <Modal.Title onClick={handleCloseModalAddFriend}>
@@ -295,30 +315,52 @@ const Profile = ({ theme }) => {
 
           {/* Create an event Modal */}
           <Modal className="addFriend" show={isCancelCreateEvent}>
-            <Modal.Header closeButton>
-              <Modal.Title>
-
+            <Modal.Header>
+              <Modal.Title onClick={handleCloseModalCreateEvent}>
+                X
               </Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
               <Form>
-                <div className="d-flex justify-content-between">
-                  <input className="form-control-lg" type='text' placeholder='Type a name' style={{ width: '100%' }} onKeyDown={e => searchFriends(e)} />
-                  <Button variant="primary" type="submit">
-                    Search
-                  </Button>
-                </div>
+
                 <div className='d-flex flex-column mt-3 '>
-                  {users && users.map((user) => (
-                    <div className='d-flex justify-content-between align-items-center friendBox'>
-                      <h4 className='pb-5 pt-5' style={{ color: 'black' }}>{user.user_name}</h4>
-                      <Button variant="primary" type="submit" style={{ height: '50px' }}>
-                        Add friend
-                      </Button>
+                  <form onSubmit={onSubmit} style={{ margin: 'auto', marginTop: '20px', textAlign: 'center', width: '100%' }}>
+                    <div className="mb-3">
+                      <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Event name</p>
+                      <input type="text" value={eventName} className="form-control" required onChange={(e) => setEventName(e.target.value)} placeholder="Give a title to your event!" />
                     </div>
 
-                  ))}
+                    <div className="mb-3">
+                      <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Event type</p>
+                      <select className="p-2" name="eventtypes" id="eventtypes" style={{ height: '10%', width: '100%', borderRadius: '6px' }} onChange={(e) => setEventType(e.target.value)}>
+                        <option value="default">[Select an event type]</option>
+                        <option value="sports">Sports</option>
+                        <option value="nature">Nature</option>
+                        <option value="movie">Movie</option>
+                        <option value="concert">Concert</option>
+                      </select>
+                    </div>
+
+                    <div className="mb-3">
+                      <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Event description</p>
+                      <textarea style={{ height: '170px' }} value={description} className="form-control" required onChange={(e) => setDescription(e.target.value)} placeholder="Describe your event" />
+                    </div>
+
+                    <div className="mb-3">
+                      <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Date</p>
+                      <input type="date" className="form-control" required onChange={(e) => setTime(e.target.value)} placeholder="Date of your event" />
+                    </div>
+
+                    <div className="mb-3">
+                      <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Time</p>
+                      <input type="time" value={time} className="form-control" required onChange={(e) => setTime(e.target.value)} placeholder="Time of your event" />
+                    </div>
+                    <Button variant="primary" type="submit" style={{ height: '40px', width: '80%', borderRadius: '6px', background: '#0c123d', color: 'white', fontWeight: 'bold' }}>
+                      Submit
+                    </Button>
+                    {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
+                  </form>
 
                 </div>
               </Form>
