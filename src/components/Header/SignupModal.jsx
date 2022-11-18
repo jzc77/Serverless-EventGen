@@ -21,13 +21,13 @@ function SignupModal({ setOpenModal }) {
   const onSubmit = (event) => {
     event.preventDefault()
 
-        setLogin(true)
     UserPool.signUp(email, password, [], null, (err, data) => {
       if (err) {
         setError(err.message)
         console.log(err)
       } else {
         console.log(data)
+        setLogin(true)
         let userData = {
           user_id: uuidv4(),
           user_name: username,
