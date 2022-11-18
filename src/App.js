@@ -7,8 +7,6 @@ import './App.css';
 
 import Hero from './components/UI/Hero';
 import LoginModal from './components/Header/LoginModal.jsx' // added
-import SignupModal from './components/Header/SignupModal';
-import { Account } from "./components/auth/Account"
 
 function App() {
   const [LoginModalOpen, setLoginModalOpen] = useState(false); // added
@@ -51,6 +49,19 @@ function App() {
         </BrowserRouter>
         </Account>
       </div>
+      {modalOpen && <LoginModal setOpenModal={setModalOpen} />}
+
+
+      <Hero theme={theme} />
+      {/* {false && <Hero theme={theme} />} */}
+      {/* <Counter /> */}
+      <Search />
+      <Services />
+      {/* <About /> */}
+      {/* <Team /> */}
+      {/* <Blog /> */}
+      <Review />
+      <Footer />
     </>
   );
 }
