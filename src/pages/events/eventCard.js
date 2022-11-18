@@ -9,7 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { blue, blueGrey, purple, red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -42,10 +42,10 @@ function EventCard(props) {
 
   return (
     // <Card sx={{ maxWidth: 345 }}>
-    <Card >
+    <Card sx={{ bgcolor: blue[200] }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
             E
           </Avatar>
         }
@@ -64,12 +64,12 @@ function EventCard(props) {
         alt="Paella dish"
       /> */}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.primary">
           <Typography paragraph>
-            Event Host: {props.owner}
-            </Typography>
+            <b>Event Host</b>: {props.owner}
+          </Typography>
           <Typography paragraph>
-            Location: {props.location}
+            <b>Location</b>: {props.location}
           </Typography>
           <Typography paragraph>
             {props.details}
