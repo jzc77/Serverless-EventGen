@@ -3,6 +3,7 @@ import "./SignupModal.css";
 import { Button } from "react-bootstrap";
 import UserPool from "../../utils/UserPool";
 import LoginModal from "./LoginModal";
+import { v4 as uuidv4 } from 'uuid';
 
 function SignupModal({ setOpenModal }) {
 
@@ -27,9 +28,28 @@ function SignupModal({ setOpenModal }) {
         console.log(err)
       } else {
         console.log(data)
-        
+        let userData = {
+          user_id: uuidv4(),
+          user_name: username,
+          user_email: email,
+          user_location: 'Vancouver'
+        }
+        fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+          },
+          body: JSON.stringify(userData)
+        })
+        .then(() => {
+          console.log('Success')
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
+        console.log("Fetch success?")
       }
-      
     })
   }
   return (

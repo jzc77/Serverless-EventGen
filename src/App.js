@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/UI/Home'
 import Profile from "./components/UI/Profile";
-import Status from './components/auth/Status';
 import './App.css';
-
 import Hero from './components/UI/Hero';
 import LoginModal from './components/Header/LoginModal.jsx' // added
 import SignupModal from './components/Header/SignupModal';
 import { Account } from "./components/auth/Account"
-import ChangePassword from './components/auth/ChangePassword';
+
 
 function App() {
   const [LoginModalOpen, setLoginModalOpen] = useState(false); // added
