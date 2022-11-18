@@ -38,7 +38,7 @@ export const EventPage = (props) => {
 		eventType: "",
 	});
 
-    const [queryParams, setQueryParams] = useState([]);
+    const [activeFilter, setActiveFilter] = useState("");
 
     // Handler for search (This is called whenever the search field changes)
     const handleSearchChange = (prop) => (event) => {
@@ -48,15 +48,13 @@ export const EventPage = (props) => {
 		});
 	};
 
+
     useEffect(() => {
         // get event data from backend here.
         // setData(data.events)
         setWorkingData(data.events); // set working data array to data from backend.
     }, []);
 
-    useEffect(() => {
-        pushToUrl(queryParams);
-    }, [queryParams])
 
     const search = () => {
         let matchingEvents = data.events; 
@@ -71,27 +69,6 @@ export const EventPage = (props) => {
     const resetSearch = () => {
         setWorkingData(data.events);   // reset working data to original events list
         setSearchQuery({ query: "" }); // reset search bar to empty
-    };
-
-    const handleFilterClick = (filter) => {
-                              
-       if (!(queryParams.includes(filter))) {
-           setQueryParams(queryParams => [...queryParams, filter]);
-
-       } else if (queryParams.includes(filter)) {
-           setQueryParams(queryParams.filter((query) => query != filter));
-       }       
-    }
-
-    const pushToUrl = (queryParams) => {
-
-        var queryString = "";
-        queryParams.forEach((query) => {
-            queryString = queryString + "?" + query + "=" + "true"
-        });
-
-        var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + queryString;
-        window.history.pushState({path: newURL}, '', newURL);
     };
 
     return (
@@ -133,8 +110,8 @@ export const EventPage = (props) => {
                      className="filters"
                      key = {index}
                      title = {filter}
-                     isActive = {queryParams.includes(filter)}
-                     onClick = { () => {handleFilterClick(filter)}}/>
+                     isActive = {filter === activeFilter}
+                     onclick={() => {}}/>
                 )
             })}
               </div>
