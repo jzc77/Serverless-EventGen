@@ -42,3 +42,22 @@
 .modal-title:hover {
     cursor: pointer;
 }
+
+.profile__img {
+    width: 30%;
+    height: 50%;
+    margin-top: 5%;
+}
+
+.profile__img img {
+    width: 100%;
+}
+
+.profile__aboutme {
+    border: solid white;
+    width: 60%;
+    padding: 40px;
+    font-size: 2.5rem;
+    line-height: 50px;
+    margin: 5%
+}

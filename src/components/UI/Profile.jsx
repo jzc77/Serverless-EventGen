@@ -9,7 +9,7 @@ import '../../styles/hero.css'
 import '../../styles/profile.css'
 import { useNavigate } from 'react-router-dom'
 
-import heroDarkImg from '../../images/pic-main-calendar.png'
+import heroDarkImg from '../../images/eventgen-profile.png'
 import lightImg from '../../images/light-hero-bg.png'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -38,7 +38,7 @@ const Profile = ({ theme }) => {
   const [status, setStatus] = useState(false)
   const navigate = useNavigate()
 
-  useEffect( () => {
+  useEffect(() => {
 
     const fetchData = async () => {
       try {
@@ -46,11 +46,11 @@ const Profile = ({ theme }) => {
         console.log("Session: ", res)
         setStatus(true)
       } catch (err) {
-        
+
         navigate('/')
       }
     }
-    
+
     fetchData()
     // getSession()
     //     .then((session) => {
@@ -60,11 +60,11 @@ const Profile = ({ theme }) => {
     //         }
     //     })
     // console.log("Status: ", status)
-    
-}, [])
 
-  
- 
+  }, [])
+
+
+
   const logoutUser = () => {
     logout()
     navigate('/')
@@ -199,22 +199,31 @@ const Profile = ({ theme }) => {
       </div>
       <div className='container'>
         <div className='hero__wrapper'>
-          <div className='hero__content'>
-            <div>
-              <h3 style={{ color: 'white ' }}>Wanna see what your friends are up to? Click the Add Friends button below.</h3><br /><br />
-              <h3 style={{ color: 'white ' }}>Wanna create your own event? Click the Create Event button below.</h3>
-              <h2 className='highlight'>Find. Meet. Grow!</h2>
-            </div>
+
+          <div className='profile__img'>
+            <img
+              src={theme === 'light-theme' ? lightImg : heroDarkImg}
+              alt='eventgen-profile' />
             <div className='hero__btns'>
               <button className='secondary__btn' onClick={handleAddFriend}>Add Friends</button>
               <button className='secondary__btn' onClick={handleAddFriend}>Create Event</button>
             </div>
+
           </div>
-          <div className='hero__img'>
-            <img
-              src={theme === 'light-theme' ? lightImg : heroDarkImg}
-              alt='pic-main-calendar' />
+
+          <div className='profile__aboutme'>
+            <div>
+              <h3 style={{ color: 'white ' }}>About Me</h3>
+              <h4 style={{ color: 'white ' }}>
+                <br />
+                Hi, thanks for stopping by! I am driven, goal-oriented, and goes after what I want in life. I'm caring and dependable.
+                <br /><br />
+                If you want to go to events together, we should chat. Send me a message and <span className='highlight'>let’s start the conversation!</span>
+              </h4>
+            </div>
+
           </div>
+
         </div>
 
         <div className='container'>
@@ -329,7 +338,7 @@ const Profile = ({ theme }) => {
         <div className='container'>
           <div className='services__top-content'>
 
-            {events ? (<h2 style={{ textAlign: 'left' }}>Looks like your friends are busy!</h2>) : <h2 style={{ textAlign: 'left' }}>Looks like your friends are pretty chill rigth now!</h2>}
+            {events ? (<h2 style={{ textAlign: 'left', marginTop: -35 }}>Looks like your friends are busy!</h2>) : <h2 style={{ textAlign: 'left' }}>Looks like your friends are pretty chill right now!</h2>}
 
           </div>
           <div className="d-flex justify-content-center">
