@@ -20,25 +20,26 @@ function SignupModal({ setOpenModal }) {
 
   const onSubmit = (event) => {
     event.preventDefault()
-
-        setLogin(true)
+    
     UserPool.signUp(email, password, [], null, (err, data) => {
       if (err) {
         setError(err.message)
         console.log(err)
       } else {
         console.log(data)
+        setLogin(true)
+
         let userData = {
           user_id: uuidv4(),
           user_name: username,
           user_email: email,
           user_location: 'Vancouver'
         }
-        fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/signup', {
+        fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/signup/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            
           },
           body: JSON.stringify(userData)
         })
@@ -50,6 +51,7 @@ function SignupModal({ setOpenModal }) {
         })
         console.log("Fetch success?")
       }
+
     })
   }
   return (
