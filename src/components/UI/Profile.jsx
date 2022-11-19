@@ -3,7 +3,6 @@ import FriendEvent from './FriendEvent'
 import UserEvent from './UserEvent'
 import Pagination from './Pagination'
 import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import '../../styles/hero.css'
 import '../../styles/profile.css'
@@ -315,9 +314,9 @@ const Profile = ({ theme }) => {
             </Modal.Header>
 
             <Modal.Body>
-              <Form>
-                  <CreateEvent />
-              </Form>
+              
+                  <CreateEvent handleCloseModalCreateEvent={handleCloseModalCreateEvent}/>
+              
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModalCreateEvent}>

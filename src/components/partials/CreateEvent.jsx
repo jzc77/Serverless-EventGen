@@ -1,13 +1,44 @@
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
-const CreateEvent = () => {
-
+import { v4 as uuidv4 } from 'uuid';
+const CreateEvent = ({ handleCloseModalCreateEvent }) => {
+    
     const [eventName, setEventName] = useState('')
     const [description, setDescription] = useState('')
     const [eventType, setEventType] = useState('')
     const [time, setTime] = useState('')
-    const onSubmit = () => {
-        
+    const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
+  
+    const onSubmit = (event) => {
+        event.preventDefault()
+        console.log(eventName)
+        let eventDetails = {
+            name : eventName,
+            description: description,
+            type: eventType,
+            time: time,
+            ownerId: 'testuser',
+            id: uuidv4(),
+        }
+        console.log("Event details: ", eventDetails)
+        fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/event', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+           
+          },
+          body: JSON.stringify(eventDetails)
+        })
+        .then(() => {
+            console.log("Details: ", eventDetails)
+            console.log('Success')
+            handleCloseModalCreateEvent()
+          
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
+
     }
     return (
 
@@ -36,13 +67,13 @@ const CreateEvent = () => {
 
                 <div className="mb-3">
                     <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Date</p>
-                    <input type="date" className="form-control" required onChange={(e) => setTime(e.target.value)} placeholder="Date of your event" />
+                    <input type="date" value={time} className="form-control" required onChange={(e) => setTime(e.target.value)} placeholder="Date of your event" />
                 </div>
 
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <p className="form-label" style={{ textAlign: 'left', color: 'white', fontWeight: 'bold' }}>Time</p>
                     <input type="time" value={time} className="form-control" required onChange={(e) => setTime(e.target.value)} placeholder="Time of your event" />
-                </div>
+                </div> */}
                 <Button variant="primary" type="submit" style={{ height: '40px', width: '80%', borderRadius: '6px', background: '#0c123d', color: 'white', fontWeight: 'bold' }}>
                     Submit
                 </Button>
