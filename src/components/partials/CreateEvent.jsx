@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import { v4 as uuidv4 } from 'uuid';
+import useFetchUsers from '../composables/useFetchUsers';
 const CreateEvent = ({ handleCloseModalCreateEvent }) => {
-    
+    const userEmail = useParams();
+    let userEmailString = userEmail.id
     const [eventName, setEventName] = useState('')
     const [description, setDescription] = useState('')
     const [eventType, setEventType] = useState('')
     const [time, setTime] = useState('')
     const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
-  
+    console.log("user email: ", userEmailString)
+    const { users } = useFetchUsers('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/getUsers', userEmailString)
+    
+    console.log("user: ", users)
     const onSubmit = (event) => {
         event.preventDefault()
         console.log(eventName)
@@ -17,7 +23,7 @@ const CreateEvent = ({ handleCloseModalCreateEvent }) => {
             description: description,
             type: eventType,
             time: time,
-            ownerId: 'testuser',
+            ownerId: users[0].user_id,
             id: uuidv4(),
         }
         console.log("Event details: ", eventDetails)

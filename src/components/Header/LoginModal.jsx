@@ -36,7 +36,20 @@ function LoginModal({ setOpenModal }) {
     authenticate(email, password)
       .then(data => {
         console.log("Logged in!", data)
-        navigate('/profile')
+        fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/getUser/' + email)
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          let userId = data.rows[0].user_id
+          console.log("Logged in user id:", data.rows[0].user_id)
+          navigate(`/profile/${userId}`)
+        })
+        .catch (err => {
+          console.error(err.message)
+        })
+
+        
       })
       .catch(err => {
         setError(err.message)

@@ -6,13 +6,12 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import '../../styles/hero.css'
 import '../../styles/profile.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import heroDarkImg from '../../images/eventgen-profile.png'
 import lightImg from '../../images/light-hero-bg.png'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import useFetch from '../composables/useFetchEvents'
 import useFetchUsers from '../composables/useFetchUsers'
 import useFetchEvents from '../composables/useFetchEvents'
 import { useContext } from 'react'
@@ -30,11 +29,13 @@ const Profile = ({ theme }) => {
   const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
   const [event_id, setEventId] = useState("12343")
 
+  const userIdObject = useParams();
+  let userId = userIdObject.id
+  // users here means the current logged in user. Need to change this variable
+  const { users, friends, setUsers, setFriends } = useFetchUsers('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/getUsers', userId) 
+  const { events, userEvents, userName, setUserEvents } = useFetchEvents(userId)
 
-  const { events, userEvents, userName, setUserEvents } = useFetchEvents('http://localhost:5000/events')
-
-  const { users, friends, setUsers, setFriends } = useFetchUsers('http://localhost:5000/users')
-
+  console.log("Users profile: ", users)
   const { getSession, logout } = useContext(AccountContext)
   const [status, setStatus] = useState(false)
   const navigate = useNavigate()
@@ -64,39 +65,11 @@ const Profile = ({ theme }) => {
 
   }, [])
 
-
-
   const logoutUser = () => {
     logout()
     navigate('/')
 
   }
-  // useEffect(() => {
-  //   // fetch('http://localhost:5000/events')
-  //   //   .then(res => {
-  //   //     return res.json()
-  //   //   })
-  //   //   .then(data => {
-  //   //     console.log(data)
-  //   //     let userData = data.filter((event) => event.user_id === 6)
-  //   //     let friendData = data.filter((event) => event.user_id !== 6)
-  //   //     console.log(userData)
-  //   //     setEvents(friendData)
-  //   //     console.log(userData[0].user_name)
-  //   //     setUserName(userData[0].user_name)
-  //   //     setUserEvents(userData)
-  //   //   })
-
-  //   fetch('http://localhost:5000/users')
-  //     .then(res => {
-  //       return res.json()
-  //     })
-  //     .then(data => {
-  //       console.log(data)
-  //       setUsers(data)
-  //       setFriends(data)
-  //     })
-  // }, [])
 
   // Get current events for user friends
   const indexOfLastEvent = currentPage * eventsPerPage
@@ -116,7 +89,6 @@ const Profile = ({ theme }) => {
   const paginateUser = (pageNumber) => {
     setCurrentPageUser(pageNumber)
   }
-
 
   const cancelEvent = (event_id) => {
     setIsCancel(true)
@@ -150,8 +122,6 @@ const Profile = ({ theme }) => {
   const handleCloseModalCreateEvent = () => {
     setIsCancelCreateEvent(false)
   }
-
-
 
 
   const searchFriends = (event, users) => {
