@@ -17,6 +17,7 @@ import useFetchEvents from '../composables/useFetchEvents'
 import { useContext } from 'react'
 import { AccountContext } from '../auth/Account'
 import CreateEvent from '../partials/CreateEvent'
+import LoginModal from '../Header/LoginModal'
 
 const Profile = ({ theme }) => {
 
@@ -28,12 +29,15 @@ const Profile = ({ theme }) => {
   const [isCancelAddFriend, setIsCancelAddFriend] = useState(false)
   const [isCancelCreateEvent, setIsCancelCreateEvent] = useState(false)
   const [event_id, setEventId] = useState("12343")
+  const [rsvpModal, setRSVPModal] = useState(false)
+
 
   const userIdObject = useParams();
   let userId = userIdObject.id
   // users here means the current logged in user. Need to change this variable
   const { users, friends, setUsers, setFriends } = useFetchUsers('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/getUsers', userId) 
   const { events, userEvents, userName, setUserEvents } = useFetchEvents(userId)
+  console.log("user events: ", userEvents)
 
   console.log("Users profile: ", users)
   const { getSession, logout } = useContext(AccountContext)
@@ -123,6 +127,33 @@ const Profile = ({ theme }) => {
     setIsCancelCreateEvent(false)
   }
 
+  const handleCloseModalRSVP = () => {
+    setRSVPModal(false)
+  }
+
+  const handleRSVP = (id) => {
+    let data = {
+        event_id: id,
+        user_id: userId
+    }
+    fetch('https://5gosohqqhi.execute-api.us-west-2.amazonaws.com/test/rsvp/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((res) => res.json)
+    .then((data) => {
+      setRSVPModal(true)
+        console.log('Success: ', data)
+        console.log("rsvp: ", rsvpModal)
+    })
+    .catch((error) => {
+        console.error('Error: ', error)
+    })
+
+}
 
   const searchFriends = (event, users) => {
     console.log(event.target.value)
@@ -274,6 +305,29 @@ const Profile = ({ theme }) => {
 
             </Modal.Footer>
           </Modal>
+          
+          {/* RSVP modal */}
+          <Modal className="" show={rsvpModal} >
+            <Modal.Header>
+              <Modal.Title onClick={handleCloseModalRSVP}>
+                X
+              </Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+             
+              <div className='d-flex flex-column mt-3 '>
+                  <p>You have successfully RSVPed to this event. We are looking forward to seeing you!</p>
+
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseModalRSVP}>
+                Close
+              </Button>
+
+            </Modal.Footer>
+          </Modal>
 
           {/* Create an event Modal */}
           <Modal className="addFriend" show={isCancelCreateEvent}>
@@ -307,7 +361,7 @@ const Profile = ({ theme }) => {
 
           </div>
           <div className="d-flex justify-content-center">
-            <FriendEvent friendsEvents={currentEvents} />
+            <FriendEvent friendsEvents={currentEvents} userId={userId} handleRSVP={handleRSVP} />
           </div>
 
           {events.length > 3 && <Pagination eventsPerPage={eventsPerPage} totalEvents={events.length} paginate={paginate} />}
