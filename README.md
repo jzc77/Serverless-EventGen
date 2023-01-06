@@ -57,4 +57,4 @@ npx json-server --watch -p 5000 src/db/db.json. You can change the port to a dif
 
 ### Show your support
 
-Give a ⭐ if you like this website!
+Give a ⭐ if you like this website
