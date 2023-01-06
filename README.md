@@ -1,64 +1,37 @@
-# Serverless-EventGen
-A multiuser application that lets users create events and view events that their friends have created.
+# EventGen - A serverless application
+### A multiuser application that lets users create events and view events that their friends have created.
 
-<h2 align="center">
-  Digital Marketing Website Design Using React.Js <br/>
-</h2>
 <div align="center">
-  <img alt="Demo" src="/home.png" />
+  <img alt="Demo" src="./mainpage.png" />
 </div>
-
+<h3 align="center">
+  EventGen main page designed with React.js <br/>
+</h2>
 <br/>
 
-Responsive Digital Marketing Website Design Using React.Js
+## Project Details
+* EventGen is a modern, serverless social networking application built with AWS microservices for the backend and a React frontend.
+* The React framework was used to create a fast and responsive user interface, while an AWS-supported backend provided a scalable and serverless application.
 
-- Smooth scrolling in each section.
-- Compatible with all mobile devices and with a beautiful and pleasant user interface.
+## Technologies
 
-## Built With
+* Frontend built with:
+  * React.js
+  * Bootstrap
+  * Material-UI
+  * CSS
+  * AWS Cognito
+  * Route 53
 
-This project was built using these technologies.
-
-- React.js
-- Javascript
-- CSS3
-- VsCode
-- Vercel
-- Remix icon
+* Backend built with:
+  * Lambda functions
 
 ## Features
 
-** Digital Marketing Website Design **
+* Add events
 
-** Digital Marketing Landing React.Js Page **
-
-** Fully Responsive **
-
-## Getting Started
-
-Clone down this repository. You will need `node.js` and `git` installed globally on your machine.
-
-## 🛠 Installation and Setup Instructions
-
-1. Installation: `npm install`
-
-2. In the project directory, you can run: `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-The page will reload if you make edits.
-
-## Usage Instructions
-
-Open the project folder and Navigate to `/src/components/`. <br/>
-You will find all the components used and you can edit your information accordingly.
-
-## Usage of src/db/db.json
-
-npm install json-server
-npx json-server --watch -p 5000 src/db/db.json. You can change the port to a different port as well.
-
-### Show your support
-
-Give a ⭐ if you like this website
+## Credits
+* Collaborated in a team of 8 as part of a final project for a Serverless Computing & Microservices course.
+* Revised template from: https://github.com/ThantZinPhyo-OP/Digital-Marketing-Web
+  * Note: the author removed public viewing of this link as noticed on Jan. 5, 2023
 
