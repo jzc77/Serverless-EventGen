@@ -1,3 +1,6 @@
+# Serverless-EventGen
+A multiuser application that lets users create events and view events that their friends have created.
+
 <h2 align="center">
   Digital Marketing Website Design Using React.Js <br/>
 </h2>
@@ -58,3 +61,4 @@ npx json-server --watch -p 5000 src/db/db.json. You can change the port to a dif
 ### Show your support
 
 Give a ⭐ if you like this website
+
